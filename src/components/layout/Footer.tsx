@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { site } from '@/config/site';
+import { Img } from '@/components/ui/Img';
 import { InstagramIcon, ArrowIcon } from '@/components/ui/Icons';
 import './Footer.css';
 
@@ -9,7 +10,9 @@ export function Footer() {
       <div className="footer__main container">
         <div className="footer__grid">
           <div className="footer__brand">
-            <Link href="/" className="footer__logo" aria-label={site.name}>{site.name}</Link>
+            <Link href="/" className="footer__logo" aria-label={site.name}>
+              <Img src="/images/logo.png" alt={site.name} className="footer__logo-image" width={316} height={86} />
+            </Link>
             <p className="footer__tagline">{site.tagline}</p>
             <p className="footer__description">{site.description}</p>
               <div className="footer__social">

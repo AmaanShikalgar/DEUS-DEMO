@@ -171,7 +171,8 @@ opacity: 0.8;
 .footer { position: relative; background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%); border-top: 0; }
 .footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent), transparent); opacity: 0.35; }
 @media (min-width: 768px) { .footer__grid { grid-template-columns: 1.6fr 1fr 1fr; gap: var(--space-3xl); } }
-.footer__logo-image { height: 2rem; }
+.footer__logo { display: inline-block; line-height: 0; }
+.footer__logo-image { display: block; height: 2rem; width: auto; }
 .footer__tagline { font-family: var(--font-heading); font-size: clamp(1.5rem, 2.6vw, 2.125rem); font-weight: 300; letter-spacing: 0.04em; line-height: 1.2; text-transform: uppercase; color: var(--color-text); margin: var(--space-lg) 0 var(--space-md); }
 .footer__description { max-width: 340px; }
 .footer__social-pill { display: inline-flex; align-items: center; gap: 0.625rem; padding: 0.625rem 1.125rem; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text); font-size: 0.8125rem; letter-spacing: 0.04em; text-decoration: none; transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }

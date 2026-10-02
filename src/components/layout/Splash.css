@@ -1,0 +1,48 @@
+/* Hidden by default (also covers no-JS + refreshes). Shown only when <html> has .show-splash */
+.splash { display: none; }
+html.show-splash .splash { display: block; position: fixed; inset: 0; z-index: 10000; }
+html.show-splash body { overflow: hidden; }
+
+/* Two halves that slide apart like a curtain */
+.splash__panel {
+  position: absolute; left: 0; right: 0; height: 50.5%;
+  background: var(--color-bg);
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+.splash__panel--top { top: 0; }
+.splash__panel--bottom { bottom: 0; }
+.splash--out .splash__panel--top { transform: translateY(-101%); }
+.splash--out .splash__panel--bottom { transform: translateY(101%); }
+
+.splash__content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.5rem;
+  transition: opacity 0.45s ease, transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.splash--out .splash__content { opacity: 0; transform: scale(1.1); }
+
+/* Brand name: wipes in left → right */
+.splash__logo {
+  width: min(58vw, 340px); height: auto;
+  opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(10px);
+  animation: splash-reveal 1.3s 0.3s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+@keyframes splash-reveal {
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
+}
+
+/* Thin progress line under the name */
+.splash__bar {
+  width: min(58vw, 340px); height: 1px;
+  background: var(--color-border); overflow: hidden;
+  opacity: 0; animation: splash-fade 0.5s 0.9s ease forwards;
+}
+.splash__bar-fill {
+  display: block; height: 100%; background: var(--color-accent);
+  transform: scaleX(0); transform-origin: left;
+  animation: splash-load 1.4s 0.9s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes splash-fade { to { opacity: 1; } }
+@keyframes splash-load { to { transform: scaleX(1); } }
