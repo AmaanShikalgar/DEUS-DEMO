@@ -1,0 +1,66 @@
+.announcement-bar {
+  height: var(--announcement-height);
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 100;
+  overflow: hidden;
+  /* soft fade at both edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.announcement-bar__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: announcement-marquee var(--marquee-duration, 60s) linear infinite;
+}
+
+/* pause while the user hovers to read an offer */
+.announcement-bar:hover .announcement-bar__track {
+  animation-play-state: paused;
+}
+
+.announcement-bar__group {
+  display: flex;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.announcement-bar__item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0 1.5rem;
+}
+
+/* separator between offers */
+.announcement-bar__item::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  margin-left: 3rem;
+  background: currentColor;
+  opacity: 0.5;
+  transform: rotate(45deg);
+}
+
+@keyframes announcement-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-bar__track { animation: none; }
+  .announcement-bar__group[aria-hidden="true"] { display: none; }
+}

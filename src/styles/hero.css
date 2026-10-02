@@ -1,0 +1,233 @@
+.hero-section {
+    position: relative
+}
+
+.template-index .hero-section {
+    margin-top: calc(-1 * var(--header-height))
+}
+
+.hero {
+    position: relative;
+    touch-action: pan-y;
+    min-height: var(--hero-min-height, 100vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden
+}
+
+.hero__media {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0
+}
+
+.hero__image,
+.hero__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block
+}
+
+.hero__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-tertiary) 50%, var(--color-bg-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.hero__placeholder-svg {
+    width: 30%;
+    height: auto;
+    fill: var(--color-border);
+    opacity: .3
+}
+
+.hero__overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, var(--hero-overlay-opacity, .4));
+    z-index: 1
+}
+
+.hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: calc(var(--header-height) + var(--space-3xl)) 0 var(--space-3xl)
+}
+
+.hero__content--center {
+    text-align: center
+}
+
+.hero__content--left {
+    text-align: left
+}
+
+.hero__content--right {
+    text-align: right
+}
+
+.hero__content-inner {
+    max-width: 800px
+}
+
+.hero__content--center .hero__content-inner {
+    margin: 0 auto
+}
+
+.hero__subheading {
+    font-family: var(--font-body);
+    font-size: .75rem;
+    font-weight: 500;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 var(--space-lg) 0
+}
+
+.hero__heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 300;
+    letter-spacing: .06em;
+    line-height: 1.05;
+    color: var(--color-text);
+    margin: 0 0 var(--space-xl) 0
+}
+
+.hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md)
+}
+
+.hero__content--center .hero__buttons {
+    justify-content: center
+}
+
+.hero__content--right .hero__buttons {
+    justify-content: flex-end
+}
+
+@media(max-width:767px) {
+    .hero__heading {
+        letter-spacing: .04em
+    }
+    .hero__buttons {
+        flex-direction: column;
+        align-items: stretch
+    }
+    .hero__content--center .hero__buttons,
+    .hero__content--right .hero__buttons {
+        align-items: stretch
+    }
+}
+
+
+/* ---------- Hero carousel ---------- */
+.hero__slide {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none
+}
+
+.hero__slide.is-active {
+    opacity: 1
+}
+
+/* slow zoom-out on the slide that is showing */
+.hero__slide.is-active .hero__image {
+    animation: hero-zoom calc(var(--hero-interval, 6000ms) + 1.2s) ease-out forwards
+}
+
+@keyframes hero-zoom {
+    from { transform: scale(1.06) }
+    to { transform: scale(1) }
+}
+
+.hero__dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: var(--space-xl);
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: .25rem
+}
+
+.hero__dot {
+    background: none;
+    border: 0;
+    padding: .75rem .25rem;
+    cursor: pointer
+}
+
+.hero__dot-bar {
+    display: block;
+    position: relative;
+    width: 1.75rem;
+    height: 2px;
+    overflow: hidden;
+    background: rgba(242, 240, 234, .35);
+    transition: width var(--transition-base), background var(--transition-fast)
+}
+
+.hero__dot:hover .hero__dot-bar {
+    background: rgba(242, 240, 234, .6)
+}
+
+.hero__dot.is-active .hero__dot-bar {
+    width: 3.5rem
+}
+
+.hero__dot:focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 2px
+}
+
+/* the bar that fills over the slide interval; its animationend advances the slide */
+.hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--color-text);
+    transform-origin: left center;
+    animation: hero-dot-fill var(--hero-interval, 6000ms) linear forwards
+}
+
+@keyframes hero-dot-fill {
+    from { transform: scaleX(0) }
+    to { transform: scaleX(1) }
+}
+
+/* keyboard users: stop auto-advancing while a dot is focused */
+.hero:has(.hero__dot:focus-visible) .hero__dot-fill {
+    animation-play-state: paused
+}
+
+/* reduced motion: no autoplay, no zoom - the visitor changes slides with the dots */
+@media (prefers-reduced-motion: reduce) {
+    .hero__slide.is-active .hero__image {
+        animation: none
+    }
+    .hero__dot-fill {
+        animation: none
+    }
+}

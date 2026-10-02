@@ -1,0 +1,32 @@
+:root {
+  --font-heading: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-inter), -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
+--color-bg: #0B0B0B;
+--color-bg-secondary: #141414;
+--color-bg-tertiary: #1E1E1E;
+--color-surface: #242424;
+--color-text: #F2F0EA;
+--color-text-secondary: #8B8B86;
+--color-accent: #D6D2C8;
+--color-accent-hover: #FFFFFF;
+--color-border: #2B2B2B;
+--color-error: #E74C3C;
+--color-success: #2ECC71;
+--color-white: #FFFFFF;
+  --space-3xs: .25rem;
+  --space-2xs: .375rem;
+  --space-xs: .5rem;
+  --space-sm: .75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 5rem;
+  --transition-fast: .2s cubic-bezier(.25, .1, .25, 1);
+  --transition-base: .4s cubic-bezier(.25, .1, .25, 1);
+  --transition-slow: .6s cubic-bezier(.25, .1, .25, 1);
+  --page-width: 1280px;
+  --page-width-narrow: 760px;
+  --header-height: 70px;
+  --announcement-height: 2.25rem;
+}

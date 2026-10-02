@@ -1,0 +1,113 @@
+.testimonials {
+background: var(--color-bg-secondary);
+}
+.testimonials__slider {
+position: relative;
+max-width: 700px;
+margin: 0 auto;
+}
+.testimonials__track {
+position: relative;
+overflow: hidden;
+min-height: 250px;
+}
+.testimonials__slide {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+opacity: 0;
+transform: translateY(20px);
+transition: opacity var(--transition-slow), transform var(--transition-slow);
+pointer-events: none;
+}
+.testimonials__slide.is-active {
+opacity: 1;
+transform: translateY(0);
+pointer-events: auto;
+position: relative;
+}
+.testimonials__quote {
+text-align: center;
+margin: 0;
+padding: 0;
+border: none;
+}
+.testimonials__stars {
+display: flex;
+justify-content: center;
+gap: 0.25rem;
+margin-bottom: var(--space-lg);
+color: var(--color-accent);
+}
+.testimonials__text {
+font-family: var(--font-heading);
+font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+font-weight: 300;
+font-style: italic;
+line-height: 1.7;
+color: var(--color-text);
+margin: 0 0 var(--space-xl) 0;
+}
+.testimonials__author {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: var(--space-sm);
+}
+.testimonials__avatar {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+object-fit: cover;
+}
+.testimonials__name {
+font-family: var(--font-body);
+font-size: 0.8125rem;
+font-weight: 500;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(--color-text-secondary);
+font-style: normal;
+}
+.testimonials__nav {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: var(--space-lg);
+margin-top: var(--space-xl);
+}
+.testimonials__nav-btn {
+background: none;
+border: 1px solid var(--color-border);
+color: var(--color-text);
+width: 44px;
+height: 44px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: all var(--transition-fast);
+}
+.testimonials__nav-btn:hover {
+border-color: var(--color-accent);
+color: var(--color-accent);
+}
+.testimonials__dots {
+display: flex;
+gap: 0.5rem;
+}
+.testimonials__dot {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: var(--color-border);
+border: none;
+cursor: pointer;
+padding: 0;
+transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.testimonials__dot.is-active {
+background: var(--color-accent);
+transform: scale(1.3);
+}
