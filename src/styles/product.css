@@ -297,7 +297,15 @@
 
 .product-page__swatch {
     position: relative;
-    cursor: pointer
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0
+}
+
+.product-page__swatch:focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 3px
 }
 
 .product-page__swatch-label {
@@ -319,8 +327,9 @@
 }
 
 .product-page__swatch.is-selected .product-page__swatch-label {
+    background: var(--color-accent);
     border-color: var(--color-accent);
-    color: var(--color-accent)
+    color: var(--color-bg)
 }
 
 .product-page__quantity {
@@ -843,3 +852,5 @@ body.modal-open {
     background: #fff !important;
     color: #000 !important
 }
+
+.product-page__size-chart-btn { margin-left: var(--space-md); }

@@ -8,10 +8,10 @@ const tee = (handle: string, title: string, color: string): Product => ({
   id: `placeholder-${handle}`, handle, title, vendor: 'DEUS',
   descriptionHtml: `<p>${color} oversized heavyweight T-shirt. Replace this by editing the product in Shopify.</p>`,
   availableForSale: true,
-  images: [
-    { url: `/products/${handle}/1.jpg`, altText: title },
-    { url: `/products/${handle}/2.jpg`, altText: `${title}, alternate view` },
-  ],
+  images: [1, 2, 3, 4].map((n) => ({
+    url: `/products/${handle}/${n}.jpg`,
+    altText: n === 1 ? title : `${title}, view ${n}`,
+  })),
   options: [{ name: 'Size', values: sizes }],
   variants: sizes.map((s) => ({
     id: `placeholder-${handle}-${s}`, title: s, availableForSale: true, price: money('899.00'),
