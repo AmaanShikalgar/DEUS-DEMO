@@ -76,7 +76,7 @@ export function CartProvider({ children, live }: { children: ReactNode; live: bo
     if (quantity < 1) return removeLine(lineId);
     if (live && cart) { const n = await cartAction('update', { cartId: cart.id, lines: [{ id: lineId, quantity }] }); if (n) setCart(n); }
     else setCart((c) => (c ? recalc({ ...c, lines: c.lines.map((l) => (l.id === lineId ? { ...l, quantity } : l)) }) : c));
-  }, [cart, live]);
+  }, [cart, live, removeLine]);
 
 
   const value = useMemo(() => ({ cart, isOpen, open: () => setOpen(true), close: () => setOpen(false), addItem, updateQuantity, removeLine }),
