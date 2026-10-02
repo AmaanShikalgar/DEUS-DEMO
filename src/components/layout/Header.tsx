@@ -2,9 +2,10 @@
 import Link from 'next/link';
 import { Img } from '@/components/ui/Img';
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { site } from '@/config/site';
 import { useCart } from '@/components/cart/CartProvider';
-import { MenuIcon, CloseIcon, SearchIcon, UserIcon, BagIcon } from '@/components/ui/Icons';
+import { MenuIcon, CloseIcon, SearchIcon, UserIcon, BagIcon, ArrowIcon, InstagramIcon } from '@/components/ui/Icons';
 import { cn } from '@/lib/format';
 
 export function Header() {
@@ -13,6 +14,8 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   // Sticky header turns blurred after 50px of scroll (rAF-throttled, like the original)
   useEffect(() => {
@@ -37,7 +40,44 @@ export function Header() {
 
   const count = cart?.totalQuantity ?? 0;
 
+  const sidebar = (
+    <div ref={menuRef} className={cn('mobile-menu', menuOpen && 'is-open')} id="mobile-menu" aria-hidden={!menuOpen}>
+      <div className="mobile-menu__overlay" onClick={() => setMenuOpen(false)} />
+      <div className="mobile-menu__inner">
+        <div className="mobile-menu__header">
+          <Link href="/" className="mobile-menu__brand" onClick={() => setMenuOpen(false)} aria-label={site.name}>
+            <Img src="/images/logo.png" alt={site.name} width={316} height={86} />
+          </Link>
+          <button className="mobile-menu__close" onClick={() => { setMenuOpen(false); toggleRef.current?.focus(); }} aria-label="Close menu"><CloseIcon /></button>
+        </div>
+        <nav className="mobile-menu__nav" aria-label="Mobile navigation">
+          <ul className="mobile-menu__list">
+            {site.nav.map((item, i) => (
+              <li className="mobile-menu__item" key={item.href} style={{ ['--item-index' as string]: i }}>
+                <Link href={item.href} className="mobile-menu__link" onClick={() => setMenuOpen(false)}>
+                  <span className="mobile-menu__num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="mobile-menu__label">{item.label}</span>
+                  <ArrowIcon className="mobile-menu__arrow" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="mobile-menu__footer">
+          <p className="mobile-menu__tagline">{site.tagline}</p>
+          <a href={site.instagram.url} className="mobile-menu__footer-link" target="_blank" rel="noopener noreferrer">
+            <InstagramIcon width={18} height={18} /><span>{site.instagram.handle}</span>
+          </a>
+          <Link href="/pages/account" className="mobile-menu__footer-link" onClick={() => setMenuOpen(false)}>
+            <UserIcon width={18} height={18} /><span>Log In</span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
+    <>
     <header className={cn('header header--sticky header--transparent', scrolled && 'is-scrolled')}>
       <div className="header__inner container">
         <button ref={toggleRef} className="header__menu-toggle" onClick={() => setMenuOpen(true)}
@@ -71,28 +111,9 @@ export function Header() {
         </div>
       </div>
 
-      <div ref={menuRef} className={cn('mobile-menu', menuOpen && 'is-open')} id="mobile-menu" aria-hidden={!menuOpen}>
-        <div className="mobile-menu__inner">
-          <div className="mobile-menu__header">
-            <span className="mobile-menu__title">MENU</span>
-            <button className="mobile-menu__close" onClick={() => { setMenuOpen(false); toggleRef.current?.focus(); }} aria-label="Close menu"><CloseIcon /></button>
-          </div>
-          <nav className="mobile-menu__nav" aria-label="Mobile navigation">
-            <ul className="mobile-menu__list">
-              {site.nav.map((item, i) => (
-                <li className="mobile-menu__item" key={item.href} style={{ ['--item-index' as string]: i }}>
-                  <Link href={item.href} className="mobile-menu__link" onClick={() => setMenuOpen(false)}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div className="mobile-menu__footer">
-            <Link href="/pages/account" className="mobile-menu__footer-link" onClick={() => setMenuOpen(false)}>
-              <UserIcon width={18} height={18} /><span>Log In</span>
-            </Link>
-          </div>
-        </div>
-      </div>
     </header>
+    {/* Portal: the header gets backdrop-filter on scroll, which would otherwise trap a fixed sidebar inside it */}
+    {mounted && createPortal(sidebar, document.body)}
+    </>
   );
 }
