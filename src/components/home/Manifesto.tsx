@@ -17,7 +17,7 @@ export function Manifesto({ heading, paragraphs, cta, image }: Props) {
             <Link href={cta.href} className="btn btn--outline manifesto__btn">{cta.label}<ArrowIcon /></Link>
           </div>
           <div className="manifesto__media" data-scroll-reveal-child>
-            <Img src={image} alt={heading} className="manifesto__image" />
+            <Img src={image} alt={heading} className="manifesto__image" width={1200} height={1600} sizes="(min-width: 768px) 50vw, 100vw" />
           </div>
         </div>
       </div>

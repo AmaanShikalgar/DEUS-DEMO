@@ -8,7 +8,7 @@ type Props = { subheading: string; heading: string; cta: { label: string; href: 
 export function ImageBanner({ subheading, heading, cta, image }: Props) {
   return (
     <section className="image-banner">
-      <div className="image-banner__media"><Img src={image} alt={heading} className="image-banner__image" /></div>
+      <div className="image-banner__media"><Img src={image} alt={heading} className="image-banner__image" fill sizes="100vw" /></div>
       <div className="image-banner__overlay" />
       <ScrollReveal className="image-banner__content image-banner__content--center">
         <div className="container">

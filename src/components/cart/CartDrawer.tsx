@@ -30,7 +30,7 @@ export function CartDrawer() {
               {lines.map((line) => (
                 <div className="cart-drawer__item" key={line.id}>
                   <div className="cart-drawer__item-image">
-                    {line.merchandise.product.image && <Img src={line.merchandise.product.image.url} alt={line.merchandise.product.title} />}
+                    {line.merchandise.product.image && <Img src={line.merchandise.product.image.url} alt={line.merchandise.product.title} width={160} height={200} sizes="96px" />}
                   </div>
                   <div>
                     <div className="cart-drawer__item-header">

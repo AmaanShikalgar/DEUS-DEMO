@@ -15,8 +15,8 @@ export function ProductCard({ product }: { product: Product }) {
     <article className="product-card">
       <Link href={href} className="product-card__link" aria-label={product.title}>
         <div className="product-card__media">
-          {primary && <Img src={primary.url} alt={product.title} className="product-card__image product-card__image--primary" />}
-          {hover && <Img src={hover.url} alt={product.title} className="product-card__image product-card__image--hover" />}
+          {primary && <Img src={primary.url} alt={product.title} className="product-card__image product-card__image--primary" fill sizes="(min-width: 1024px) 33vw, 50vw" />}
+          {hover && <Img src={hover.url} alt={product.title} className="product-card__image product-card__image--hover" fill sizes="(min-width: 1024px) 33vw, 50vw" />}
           {!inStock && <span className="product-card__badge product-card__badge--sold-out">Sold Out</span>}
           {inStock && onSale && <span className="product-card__badge product-card__badge--sale">-{percentOff}%</span>}
         </div>

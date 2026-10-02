@@ -28,8 +28,8 @@ export const site = {
     { label: 'TERMS', href: '/pages/terms' },
   ],
   community: [
-    '/images/SocialGrid/SC1.png',
-    '/images/SocialGrid/SC2.png',
+    '/images/SocialGrid/SC1.jpg',
+    '/images/SocialGrid/SC2.jpg',
     '/images/SocialGrid/SC4.png',
     '/images/SocialGrid/SC5.jpg',
   ],

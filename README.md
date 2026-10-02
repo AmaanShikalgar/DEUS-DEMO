@@ -39,3 +39,10 @@ npm run dev        # http://localhost:3000
 - Wire the newsletter form (`home/Newsletter.tsx`) to Shopify or Klaviyo.
 - Build real content pages at `/pages/[slug]` and an account flow.
 - Add Razorpay in Shopify's payment settings if needed. No code change is required.
+
+## Performance
+- Photos are served through `next/image` (AVIF/WebP, resized per device, cached on Vercel's CDN). Give any new image a `sizes` hint; see `components/ui/Img.tsx`.
+- **Before adding photos, run `npm run optimize-images`.** It shrinks anything in `public/images` and `public/products` (max 2400px wide, 1600px for products, 1200px for the Instagram grid) and converts big PNG photos to JPG, updating references in `src/`. Raw camera files (10 MB+) make the first load of each image slow even with the optimiser.
+- Export hero images at least 1920px wide. Anything smaller is stretched and looks soft on desktop.
+- Product, collection and content pages are pre-rendered at build time.
+- The first hero slide loads at high priority; the other three load quietly about a second later.

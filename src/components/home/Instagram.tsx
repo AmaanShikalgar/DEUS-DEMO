@@ -13,7 +13,7 @@ export function Instagram({ heading = 'DEUS / DAILY', images }: { heading?: stri
         <div className={`instagram__grid${list.length % 4 === 0 ? ' instagram__grid--4' : ''}`} data-scroll-reveal-child>
           {list.map((src, i) => (
             <a key={src} href={site.instagram.url} className="instagram__item" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-              <Img src={src} alt={`Instagram post ${i + 1}`} className="instagram__image" />
+              <Img src={src} alt={`Instagram post ${i + 1}`} className="instagram__image" fill sizes="(min-width: 640px) 25vw, 50vw" />
               <div className="instagram__overlay"><InstagramIcon width={28} height={28} /></div>
             </a>
           ))}

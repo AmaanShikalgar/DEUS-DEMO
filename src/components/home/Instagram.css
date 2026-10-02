@@ -67,3 +67,5 @@ gap: var(--space-sm);
 }
 
 @media (min-width: 640px) { .instagram__grid--4 { grid-template-columns: repeat(4, 1fr); } }
+
+.instagram__item { background: var(--color-bg-tertiary); }

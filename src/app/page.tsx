@@ -15,7 +15,7 @@ export default async function HomePage() {
         subheading="ESSENTIAL PIECES DESIGNED WITH PRECISION, RESTRAINT AND PURPOSE."
         heading="BUILT WITH INTENT."
         cta={{ label: 'SHOP COLLECTION', href: '/collections/all' }}
-        images={['/images/Hero1.png', '/images/Hero2.jpg', '/images/Hero3.png', '/images/Hero4.jpg']}
+        images={['/images/Hero1.jpg', '/images/Hero2.jpg', '/images/Hero3.png', '/images/Hero4.jpg']}
       />
       <FeaturedCollection subheading="Refined staples built for everyday wear." heading="THE ESSENTIALS" products={products} href="/collections/all" columns={3} />
       <Manifesto
@@ -32,7 +32,7 @@ export default async function HomePage() {
         subheading="Oversized · Heavyweight · Essential"
         heading="DESIGNED AROUND THE ESSENTIAL T-SHIRT."
         cta={{ label: 'EXPLORE T-SHIRTS', href: '/collections/t-shirts' }}
-        image="/images/First_Collection.png"
+        image="/images/First_Collection.jpg"
       />
       <Instagram heading="DEUS / DAILY" />
       <Newsletter />

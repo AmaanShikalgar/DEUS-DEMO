@@ -1,6 +1,11 @@
 import { pages } from '@/config/pages';
 import { Img } from '@/components/ui/Img';
 
+/** Pre-render every known page so it is served straight from the CDN. */
+export function generateStaticParams() {
+  return [...new Set([...Object.keys(pages), 'shipping', 'returns', 'privacy', 'terms'])].map((slug) => ({ slug }));
+}
+
 /** Static content pages (about, contact, policies). Later: pull from Shopify `page(handle:)` or a CMS. */
 export default async function ContentPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -11,7 +16,7 @@ export default async function ContentPage({ params }: { params: Promise<{ slug: 
         <div className="section-header">
           <h1 className="section-header__heading">{page?.title ?? slug.replace(/-/g, ' ').toUpperCase()}</h1>
         </div>
-        {page?.image && <Img src={page.image} alt={page.title} style={{ width: '100%', marginBottom: 'var(--space-2xl)' }} />}
+        {page?.image && <Img src={page.image} alt={page.title} width={1600} height={900} sizes="(min-width: 760px) 760px, 100vw" style={{ width: '100%', height: 'auto', marginBottom: 'var(--space-2xl)' }} />}
         <div className="rte">
           {page ? (
             page.blocks.map((b, i) => (

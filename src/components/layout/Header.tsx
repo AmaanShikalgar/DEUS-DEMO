@@ -87,7 +87,7 @@ export function Header() {
 
         <div className="header__logo">
           <Link href="/" className="header__logo-link" aria-label={site.name}>
-            <Img src="/images/logo.png" alt={site.name} className="header__logo-image" width={316} height={86} loading="eager" />
+            <Img src="/images/logo.png" alt={site.name} className="header__logo-image" width={316} height={86} priority />
           </Link>
         </div>
 

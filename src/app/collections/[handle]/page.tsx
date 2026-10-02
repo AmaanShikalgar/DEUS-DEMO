@@ -2,6 +2,11 @@ import { notFound } from 'next/navigation';
 import { getCollection } from '@/lib/shopify';
 import { ProductGrid } from '@/components/product/ProductGrid';
 
+/** Pre-render the main collections; any other handle is generated on first visit and cached. */
+export function generateStaticParams() {
+  return [{ handle: 'all' }, { handle: 't-shirts' }];
+}
+
 export default async function CollectionPage({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = await params;
   const collection = await getCollection(handle);

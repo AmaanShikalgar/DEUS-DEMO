@@ -53,3 +53,5 @@ width: 60%;
 height: auto;
 fill: var(--color-border);
 }
+
+.manifesto__media { background: var(--color-bg-tertiary); }

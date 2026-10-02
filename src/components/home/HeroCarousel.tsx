@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Img } from '@/components/ui/Img';
 import { cn } from '@/lib/format';
 
@@ -21,6 +21,12 @@ type Props = {
  */
 export function HeroCarousel({ images, intervalMs = 6000, children }: Props) {
   const [index, setIndex] = useState(0);
+  // Slides 2+ mount after the first has painted, so they never compete with it for bandwidth.
+  const [armed, setArmed] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setArmed(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
   const swipeStart = useRef<{ x: number; y: number } | null>(null);
   const count = images.length;
   const go = (i: number) => setIndex(((i % count) + count) % count);
@@ -45,11 +51,13 @@ export function HeroCarousel({ images, intervalMs = 6000, children }: Props) {
       onPointerCancel={() => { swipeStart.current = null; }}
     >
       <div className="hero__media">
-        {images.map((src, i) => (
-          <div key={src} className={cn('hero__slide', i === index && 'is-active')} aria-hidden={i !== index}>
-            <Img src={src} alt="" className="hero__image" loading={i === 0 ? 'eager' : 'lazy'} />
-          </div>
-        ))}
+        {images.map((src, i) =>
+          i === 0 || armed || i === index ? (
+            <div key={src} className={cn('hero__slide', i === index && 'is-active')} aria-hidden={i !== index}>
+              <Img src={src} alt="" className="hero__image" fill sizes="100vw" priority={i === 0} fetchPriority={i === 0 ? 'high' : 'low'} />
+            </div>
+          ) : null,
+        )}
       </div>
       <div className="hero__overlay" />
 

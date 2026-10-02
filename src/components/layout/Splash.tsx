@@ -32,7 +32,7 @@ export function Splash() {
       <div className="splash__panel splash__panel--top" />
       <div className="splash__panel splash__panel--bottom" />
       <div className="splash__content">
-        <Img src="/images/logo.png" alt={site.name} className="splash__logo" width={316} height={86} loading="eager" />
+        <Img src="/images/logo.png" alt={site.name} className="splash__logo" width={316} height={86} priority />
         <span className="splash__bar"><span className="splash__bar-fill" /></span>
       </div>
     </div>

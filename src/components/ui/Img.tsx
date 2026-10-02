@@ -1,10 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-import type { ImgHTMLAttributes } from 'react';
-
 /**
- * Thin wrapper so the original CSS (which targets plain <img>) keeps working exactly.
- * Swap the body for next/image later if you want automatic optimisation.
+ * All photos go through next/image: it serves AVIF/WebP, resized to the screen,
+ * lazy-loaded, from Vercel's CDN. Give each use a `sizes` hint (how wide the image
+ * renders) and either width/height or `fill` inside a positioned parent.
  */
-export function Img({ alt, ...props }: ImgHTMLAttributes<HTMLImageElement> & { alt: string }) {
-  return <img loading="lazy" decoding="async" alt={alt} {...props} />;
-}
+export { default as Img } from 'next/image';
